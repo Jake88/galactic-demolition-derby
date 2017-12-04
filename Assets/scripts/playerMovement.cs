@@ -4,25 +4,20 @@ using UnityEngine;
 
 public class playerMovement : MonoBehaviour {
 
-    public GameObject part;
+    public Rigidbody rb;
+    public float thrust = 1;
 
 	// Use this for initialization
 	void Start () {
+        rb = GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-
-    }
-
-    void OnCollisionEnter(Collision other)
-    {
-        Debug.Log("asd");
-
-        if (other.gameObject.tag == "enemy")
-        { 
-        GameObject tempObj = Instantiate(part, other.contacts[0].point, transform.rotation);
-        Destroy(tempObj, 3);
-     }
+	void FixedUpdate () {
+        if (Input.GetKey(KeyCode.W))
+        {
+            rb.AddForce(transform.forward * thrust);
+            Debug.Log(rb.velocity);
+        }
     }
 }
