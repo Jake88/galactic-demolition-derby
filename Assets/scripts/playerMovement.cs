@@ -17,7 +17,6 @@ public class playerMovement : MonoBehaviour {
         if (Input.GetKey(KeyCode.W))
         {
             rb.AddForce(transform.forward * thrust);
-            Debug.Log(rb.velocity);
         }
     }
 }
