@@ -17,28 +17,25 @@ namespace DigitalRuby.Earth
 {
     public class MoveScript : MonoBehaviour
     {
-        public float Speed = 10.0f;
+        public float speed = 10.0f;
+		public Camera cam;
 
-        private void Start()
-        {
+		private Rigidbody rb;
 
-        }
-
-        private void Update()
+		void Start()
+		{
+			rb = GetComponent<Rigidbody> ();
+		}
+        private void FixedUpdate()
         {
             float move = Input.GetAxis("Vertical");
-            transform.position += (transform.forward * Speed * Time.deltaTime * move);
+			transform.position += (cam.transform.forward * speed * Time.deltaTime * move);
             move = Input.GetAxis("Horizontal");
-            transform.position += (transform.right * Speed * Time.deltaTime * move);
+			transform.position += (cam.transform.right * speed * Time.deltaTime * move);
 
-            var pitch = Input.GetAxis("Mouse Y") * -150.0f * Time.deltaTime;
-            var yaw = Input.GetAxis("Mouse X") * 150.0f * Time.deltaTime;
-            var roll = (Input.GetMouseButton(1) ? yaw : 0.0f);
-            if (roll != 0.0f)
-            {
-                yaw = 0.0f;
-            }
-            transform.Rotate(pitch, yaw, roll);
+			print (rb.velocity);
+			//Vector3.Lerp(transform.position, transform.position += (cam.transform.forward * speed * Time.deltaTime * move), speed);
+           // transform.Rotate(pitch, yaw, roll);
         }
     }
 }
